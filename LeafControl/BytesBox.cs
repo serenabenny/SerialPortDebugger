@@ -232,12 +232,12 @@ namespace LeafSoft.LeafControl
                     MessageBox.Show("不允许内容为空！");
                     return null;
                 }
-
+                var strContect = string.IsNullOrEmpty(this.SelectedText) ? Text.Trim() : SelectedText.Trim();
                 byte[] data;
                 switch (_EncodeType)
                 {
                     case EnumType.DataEncode.Hex:
-                        string[] HexStr = this.Text.Trim().Split(' ');
+                        string[] HexStr = strContect.Split(' ');
                         data = new byte[HexStr.Length];
                         for (int i = 0; i < HexStr.Length; i++)
                         {
@@ -246,15 +246,15 @@ namespace LeafSoft.LeafControl
                         Cmd = new Model.CMD(EnumType.DataEncode.Hex, data);
                         break;
                     case EnumType.DataEncode.ASCII:
-                        data = new ASCIIEncoding().GetBytes(this.Text.Trim());
+                        data = new ASCIIEncoding().GetBytes(strContect);
                         Cmd = new Model.CMD(EnumType.DataEncode.ASCII, data);
                         break;
                     case EnumType.DataEncode.UTF8:
-                        data = new UTF8Encoding().GetBytes(this.Text);
+                        data = new UTF8Encoding().GetBytes(strContect);
                         Cmd = new Model.CMD(EnumType.DataEncode.UTF8, data);
                         break;
                     case EnumType.DataEncode.GB2312:
-                        data = Encoding.GetEncoding("GB2312").GetBytes(this.Text);
+                        data = Encoding.GetEncoding("GB2312").GetBytes(strContect);
                         Cmd = new Model.CMD(EnumType.DataEncode.GB2312, data);
                         break;
                 }

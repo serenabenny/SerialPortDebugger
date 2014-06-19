@@ -134,6 +134,7 @@ namespace LeafSoft
         private void MS_CheckSum_Click(object sender, EventArgs e)
         {
             Model.CMD cmd=txtContent.GetCMD();
+            
             if (cmd != null)
             {
                 byte check = Lib.BytesCheck.GetXOR(cmd.Bytes);

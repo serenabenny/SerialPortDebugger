@@ -203,5 +203,17 @@ namespace LeafSoft
         }
         #endregion
 
+        private void XorCRCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Model.CMD cmd = txtContent.GetCMD();
+            if (cmd != null)
+            {
+
+                byte check = Lib.BytesCheck.GetXOR(cmd.Bytes);
+                txtContent.AppendText(Convert.ToString(check, 16).PadLeft(2, '0'));
+            }
+        }
+
+
     }
 }

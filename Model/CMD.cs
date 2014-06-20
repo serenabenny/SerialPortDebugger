@@ -93,7 +93,7 @@ namespace LeafSoft.Model
             set { _byteCMD = value; }
         }
 
-
+        public string ButtonText { get { return "发送"; } }
         public long ObjectId { get; set; }
     }
 }

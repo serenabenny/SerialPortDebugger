@@ -45,7 +45,11 @@ namespace LeafSoft.Lib
                 return Cmd[0];
             }
         }
-
+        /// <summary>
+        /// 计算校验和
+        /// </summary>
+        /// <param name="Cmd"></param>
+        /// <returns></returns>
         public static byte GetCRC(byte[] Cmd)
         {
             if (Cmd.Length > 1)

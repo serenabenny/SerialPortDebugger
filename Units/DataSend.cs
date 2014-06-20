@@ -94,7 +94,7 @@ namespace LeafSoft.Units
 
         private void dgCMD_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            dgCMD.Rows[e.RowIndex].Cells[3].Value = "发送";
+            //dgCMD.Rows[e.RowIndex].Cells[3].Value = "发送";
         }
 
         /// <summary>

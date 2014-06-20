@@ -31,6 +31,15 @@ namespace LeafSoft.Units
 
         private const string DBName = "Instruct.ndb";
 
+
+        //private bool _autoresult;
+
+        public bool AutoResult
+        {
+            get { return ckbAutoSend.Checked; }
+            set { ckbAutoSend.Checked = value; }
+        }
+
         /// <summary>
         /// 是否在自动循环发送状态
         /// </summary>

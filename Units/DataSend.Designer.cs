@@ -33,6 +33,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgCMD = new System.Windows.Forms.DataGridView();
+            this.IsAutoSend = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CMDText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSend = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MS_Add = new System.Windows.Forms.ToolStripMenuItem();
             this.MS_Edit = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,10 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
-            this.IsAutoSend = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CMDText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSend = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ckbAutoSend = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCMD)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -93,6 +93,41 @@
             this.dgCMD.TabIndex = 0;
             this.dgCMD.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCMD_CellContentClick);
             this.dgCMD.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgCMD_RowsAdded);
+            // 
+            // IsAutoSend
+            // 
+            this.IsAutoSend.HeaderText = "参与循环";
+            this.IsAutoSend.Name = "IsAutoSend";
+            this.IsAutoSend.Width = 60;
+            // 
+            // CType
+            // 
+            this.CType.DataPropertyName = "ContentTypeName";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CType.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CType.HeaderText = "类型";
+            this.CType.Name = "CType";
+            this.CType.ReadOnly = true;
+            this.CType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.CType.Width = 60;
+            // 
+            // CMDText
+            // 
+            this.CMDText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CMDText.DataPropertyName = "Text";
+            this.CMDText.HeaderText = "命令";
+            this.CMDText.Name = "CMDText";
+            this.CMDText.ReadOnly = true;
+            // 
+            // btnSend
+            // 
+            this.btnSend.DataPropertyName = "ButtonText";
+            this.btnSend.HeaderText = "发送";
+            this.btnSend.Name = "btnSend";
+            this.btnSend.ReadOnly = true;
+            this.btnSend.Text = "发送";
             // 
             // contextMenuStrip1
             // 
@@ -195,43 +230,9 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "发送字节数：";
             // 
-            // IsAutoSend
-            // 
-            this.IsAutoSend.HeaderText = "参与循环";
-            this.IsAutoSend.Name = "IsAutoSend";
-            this.IsAutoSend.Width = 60;
-            // 
-            // CType
-            // 
-            this.CType.DataPropertyName = "ContentTypeName";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CType.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CType.HeaderText = "类型";
-            this.CType.Name = "CType";
-            this.CType.ReadOnly = true;
-            this.CType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.CType.Width = 60;
-            // 
-            // CMDText
-            // 
-            this.CMDText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CMDText.DataPropertyName = "Text";
-            this.CMDText.HeaderText = "命令";
-            this.CMDText.Name = "CMDText";
-            this.CMDText.ReadOnly = true;
-            // 
-            // btnSend
-            // 
-            this.btnSend.DataPropertyName = "ButtonText";
-            this.btnSend.HeaderText = "发送";
-            this.btnSend.Name = "btnSend";
-            this.btnSend.ReadOnly = true;
-            this.btnSend.Text = "发送";
-            // 
             // ckbAutoSend
             // 
+            this.ckbAutoSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbAutoSend.AutoSize = true;
             this.ckbAutoSend.Location = new System.Drawing.Point(379, 162);
             this.ckbAutoSend.Name = "ckbAutoSend";

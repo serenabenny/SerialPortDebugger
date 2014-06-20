@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 /*---------------作者：Maximus Ye----------------------*/
 /*---------------时间：2013年8月16日---------------*/
@@ -42,6 +43,33 @@ namespace LeafSoft.PartPanel
             else
             {
                 DataReceiver.AddData(data);
+            }
+
+            if (DataSender.AutoResult)
+            {
+                byte[] aSendResult = data;
+
+                //应答帧
+                aSendResult[aSendResult.Length - 3] = 0xA1;
+                Configer.SendData(aSendResult);
+
+                Thread.Sleep(1000);
+                //打开药盒
+                //byte[] aSendResult = data;
+                aSendResult[aSendResult.Length - 3] = 0x01;
+                Configer.SendData(aSendResult);
+                Thread.Sleep(1000);
+                //关上药盒
+                //byte[] aSendResult = data;
+                aSendResult[aSendResult.Length - 3] = 0x02;
+                Configer.SendData(aSendResult);
+                Thread.Sleep(1000);
+                //返回数据
+                //byte[] aSendResult = data;
+                aSendResult[aSendResult.Length - 3] = 0x00;
+                Configer.SendData(aSendResult);
+                Thread.Sleep(1000);
+
             }
         }
 

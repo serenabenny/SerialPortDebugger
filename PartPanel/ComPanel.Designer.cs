@@ -41,9 +41,9 @@
             // 
             // DataReceiver
             // 
-            this.DataReceiver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataReceiver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataReceiver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DataReceiver.Location = new System.Drawing.Point(0, 209);
             this.DataReceiver.Name = "DataReceiver";
@@ -52,8 +52,8 @@
             // 
             // DataSender
             // 
-            this.DataSender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataSender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataSender.Location = new System.Drawing.Point(148, 0);
             this.DataSender.Name = "DataSender";
             this.DataSender.Size = new System.Drawing.Size(652, 211);
@@ -80,9 +80,9 @@
             // 
             // txtCmd
             // 
-            this.txtCmd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCmd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCmd.BackColor = System.Drawing.Color.Black;
             this.txtCmd.ContextMenuStrip = this.contextMenuStrip1;
             this.txtCmd.ForeColor = System.Drawing.Color.White;
@@ -93,7 +93,7 @@
             this.txtCmd.Size = new System.Drawing.Size(800, 288);
             this.txtCmd.TabIndex = 7;
             this.txtCmd.Visible = false;
-            this.txtCmd.DataSend += new Lib.LeafEvent.DataSendHandler(this.txtCmd_DataSend);
+            this.txtCmd.DataSend += new LeafSoft.Lib.LeafEvent.DataSendHandler(this.txtCmd_DataSend);
             // 
             // contextMenuStrip1
             // 
@@ -101,12 +101,12 @@
             this.MS_ClearCMD});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(128, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(76, 26);
             // 
             // MS_ClearCMD
             // 
             this.MS_ClearCMD.Name = "MS_ClearCMD";
-            this.MS_ClearCMD.Size = new System.Drawing.Size(127, 22);
+            this.MS_ClearCMD.Size = new System.Drawing.Size(75, 22);
             this.MS_ClearCMD.Text = "清空";
             this.MS_ClearCMD.Click += new System.EventHandler(this.MS_ClearCMD_Click);
             // 
@@ -114,11 +114,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtCmd);
             this.Controls.Add(this.btnSuper);
             this.Controls.Add(this.DataReceiver);
             this.Controls.Add(this.DataSender);
             this.Controls.Add(this.Configer);
+            this.Controls.Add(this.txtCmd);
             this.Name = "ComPanel";
             this.Size = new System.Drawing.Size(800, 500);
             this.contextMenuStrip1.ResumeLayout(false);

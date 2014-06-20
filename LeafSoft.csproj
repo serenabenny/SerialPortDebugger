@@ -40,6 +40,14 @@
     <ApplicationIcon>leafsoft.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.14.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="NDatabase3, Version=3.8.0.13, Culture=neutral, PublicKeyToken=31d8e3cda240c056, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\NDatabase3.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -119,6 +127,7 @@
     <Compile Include="PartPanel\BasePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Units\ExtMethod.cs" />
     <Compile Include="Units\NetTCPServer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -323,6 +332,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="leafsoft.ico" />
+    <Content Include="Lib\FastColoredTextBox.dll" />
+    <Content Include="Lib\NDatabase3.dll" />
     <Content Include="LICENSE.txt" />
     <None Include="Resources\license.png" />
     <None Include="Resources\monitor_socket_icon.ico" />

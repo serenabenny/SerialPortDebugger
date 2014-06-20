@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using LeafSoft.Lib;
+using FastColoredTextBoxNS;
 /*---------------作者：Maximus Ye----------------------*/
 /*---------------时间：2013年8月16日---------------*/
 /*---------------邮箱：yq@yyzq.net---------*/
@@ -75,9 +77,11 @@ namespace LeafSoft.Units
             {
                 if (cbxAutoLine.Checked && txtData.Text.Length > 0)
                 {
-                    txtData.AppendText("\r\n");
+                    //txtData.AppendText(Environment.NewLine);
                 }
                 txtData.AppendText(content);
+                
+                
             }));
         }
         private void lblCount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -241,5 +245,23 @@ namespace LeafSoft.Units
             return BToInt32;
         }
         #endregion
+
+        TextStyle redStyle = new TextStyle(Brushes.Red, null, FontStyle.Underline);
+
+        private void txtData_TextChangedDelayed(object sender, TextChangedEventArgs e)
+        {
+            
+            e.ChangedRange.ClearStyle(redStyle);
+            e.ChangedRange.SetStyle(redStyle, @"("+txtMark.Text+@")*");
+            
+        }
+        
+        private void txtData_WordWrapNeeded(object sender, WordWrapNeededEventArgs e)
+        {
+            Regex regex = new Regex(@"(" + txtMark.Text + @")");
+            e.CutOffPositions.Clear();
+            foreach (Match m in regex.Matches(e.Line.Text))
+                e.CutOffPositions.Add(m.Index);
+        }
     }
 }

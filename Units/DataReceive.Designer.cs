@@ -1,4 +1,6 @@
-﻿namespace LeafSoft.Units
+﻿using FastColoredTextBoxNS;
+
+namespace LeafSoft.Units
 {
     partial class DataReceive
     {
@@ -29,7 +31,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.txtData = new System.Windows.Forms.TextBox();
+            this.txtData = new FastColoredTextBoxNS.FastColoredTextBox();
             this.CMS_Main = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MS_Clear = new System.Windows.Forms.ToolStripMenuItem();
             this.MS_ToInt = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,23 +45,48 @@
             this.rbtnUTF8 = new System.Windows.Forms.RadioButton();
             this.rbtnGB2312 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtMark = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.txtData)).BeginInit();
             this.CMS_Main.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtData
             // 
-            this.txtData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtData.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtData.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.txtData.BackBrush = null;
+            this.txtData.CharHeight = 14;
+            this.txtData.CharWidth = 8;
             this.txtData.ContextMenuStrip = this.CMS_Main;
-            this.txtData.Location = new System.Drawing.Point(0, 16);
-            this.txtData.MaxLength = 1;
-            this.txtData.Multiline = true;
+            this.txtData.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtData.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtData.IsReplaceMode = false;
+            this.txtData.Location = new System.Drawing.Point(0, 26);
             this.txtData.Name = "txtData";
+            this.txtData.Paddings = new System.Windows.Forms.Padding(0);
             this.txtData.ReadOnly = true;
-            this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtData.Size = new System.Drawing.Size(523, 179);
+            this.txtData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtData.Size = new System.Drawing.Size(523, 167);
             this.txtData.TabIndex = 1;
+            this.txtData.WordWrap = true;
+            this.txtData.WordWrapMode = FastColoredTextBoxNS.WordWrapMode.Custom;
+            this.txtData.Zoom = 100;
+            this.txtData.TextChangedDelayed += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.txtData_TextChangedDelayed);
+            this.txtData.WordWrapNeeded += new System.EventHandler<FastColoredTextBoxNS.WordWrapNeededEventArgs>(this.txtData_WordWrapNeeded);
             // 
             // CMS_Main
             // 
@@ -104,6 +131,8 @@
             // cbxAutoLine
             // 
             this.cbxAutoLine.AutoSize = true;
+            this.cbxAutoLine.Checked = true;
+            this.cbxAutoLine.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbxAutoLine.Location = new System.Drawing.Point(0, 0);
             this.cbxAutoLine.Name = "cbxAutoLine";
             this.cbxAutoLine.Size = new System.Drawing.Size(72, 16);
@@ -190,10 +219,29 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "提示：右键Hex计算数值";
             // 
+            // txtMark
+            // 
+            this.txtMark.Location = new System.Drawing.Point(344, 2);
+            this.txtMark.Name = "txtMark";
+            this.txtMark.Size = new System.Drawing.Size(100, 21);
+            this.txtMark.TabIndex = 10;
+            this.txtMark.Text = "EE 55";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(309, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "标识";
+            // 
             // DataReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtMark);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rbtnGB2312);
             this.Controls.Add(this.rbtnUTF8);
@@ -205,6 +253,7 @@
             this.Controls.Add(this.cbxAutoLine);
             this.Name = "DataReceive";
             this.Size = new System.Drawing.Size(523, 210);
+            ((System.ComponentModel.ISupportInitialize)(this.txtData)).EndInit();
             this.CMS_Main.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,7 +262,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtData;
+        private FastColoredTextBox txtData;
         private System.Windows.Forms.CheckBox cbxAutoLine;
         private System.Windows.Forms.RadioButton rbtnHex;
         private System.Windows.Forms.RadioButton rbtnASCII;
@@ -227,5 +276,7 @@
         private System.Windows.Forms.RadioButton rbtnUTF8;
         private System.Windows.Forms.RadioButton rbtnGB2312;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtMark;
+        private System.Windows.Forms.Label label1;
     }
 }

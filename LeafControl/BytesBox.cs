@@ -100,6 +100,8 @@ namespace LeafSoft.LeafControl
         {
             if (EncodeChanging==false && _EncodeType == EnumType.DataEncode.Hex)
             {//Hex输入
+                int nStart = SelectionStart;
+                bool bIsLast = (nStart == TextLength);
                 string Content = this.Text.Replace(" ", "");//获取去除空格后的字符内容
                 int SpaceCount = Content.Length / 2;
                 int StartIndex = 2;
@@ -109,7 +111,15 @@ namespace LeafSoft.LeafControl
                     StartIndex = StartIndex + 3;
                 }
                 this.Text = Content.TrimEnd().ToUpper();
-                this.SelectionStart = this.Text.Length;
+                if (bIsLast)
+                {
+                    SelectionStart = TextLength;
+                }
+                else
+                {
+                    this.SelectionStart = nStart;
+                }
+                
             }
         }
 
@@ -232,12 +242,12 @@ namespace LeafSoft.LeafControl
                     MessageBox.Show("不允许内容为空！");
                     return null;
                 }
-                var strContect = string.IsNullOrEmpty(this.SelectedText) ? Text.Trim() : SelectedText.Trim();
+                string sSelectText = string.IsNullOrEmpty(SelectedText.Trim()) ? Text : SelectedText;
                 byte[] data;
                 switch (_EncodeType)
                 {
                     case EnumType.DataEncode.Hex:
-                        string[] HexStr = strContect.Split(' ');
+                        string[] HexStr = sSelectText.Trim().Split(' ');
                         data = new byte[HexStr.Length];
                         for (int i = 0; i < HexStr.Length; i++)
                         {
@@ -246,15 +256,15 @@ namespace LeafSoft.LeafControl
                         Cmd = new Model.CMD(EnumType.DataEncode.Hex, data);
                         break;
                     case EnumType.DataEncode.ASCII:
-                        data = new ASCIIEncoding().GetBytes(strContect);
+                        data = new ASCIIEncoding().GetBytes(sSelectText.Trim());
                         Cmd = new Model.CMD(EnumType.DataEncode.ASCII, data);
                         break;
                     case EnumType.DataEncode.UTF8:
-                        data = new UTF8Encoding().GetBytes(strContect);
+                        data = new UTF8Encoding().GetBytes(sSelectText);
                         Cmd = new Model.CMD(EnumType.DataEncode.UTF8, data);
                         break;
                     case EnumType.DataEncode.GB2312:
-                        data = Encoding.GetEncoding("GB2312").GetBytes(strContect);
+                        data = Encoding.GetEncoding("GB2312").GetBytes(sSelectText);
                         Cmd = new Model.CMD(EnumType.DataEncode.GB2312, data);
                         break;
                 }

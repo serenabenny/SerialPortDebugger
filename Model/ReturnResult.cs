@@ -208,8 +208,8 @@ namespace LeafSoft.Model
             //{
             //    odb2.Store(lstMasters);
             //}
-            aMaster.SourceInstruct = "EE 55 08 AA 0D 00 12 01 02 0A 00 D6";
-            var a=aMaster.ToString();
+            //aMaster.SourceInstruct = "EE 55 08 AA 0D 00 12 01 02 0A 00 D6";
+            //var a=aMaster.ToString();
         }
 
     }

@@ -45,15 +45,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataReceiver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DataReceiver.Location = new System.Drawing.Point(0, 209);
+            this.DataReceiver.Location = new System.Drawing.Point(0, 210);
             this.DataReceiver.Name = "DataReceiver";
-            this.DataReceiver.Size = new System.Drawing.Size(800, 288);
+            this.DataReceiver.Size = new System.Drawing.Size(800, 287);
             this.DataReceiver.TabIndex = 4;
             // 
             // DataSender
             // 
             this.DataSender.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataSender.AutoResult = false;
             this.DataSender.Location = new System.Drawing.Point(148, 0);
             this.DataSender.Name = "DataSender";
             this.DataSender.Size = new System.Drawing.Size(652, 211);
@@ -115,10 +116,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnSuper);
-            this.Controls.Add(this.DataReceiver);
             this.Controls.Add(this.DataSender);
             this.Controls.Add(this.Configer);
             this.Controls.Add(this.txtCmd);
+            this.Controls.Add(this.DataReceiver);
             this.Name = "ComPanel";
             this.Size = new System.Drawing.Size(800, 500);
             this.contextMenuStrip1.ResumeLayout(false);

@@ -16,6 +16,7 @@ using System.Threading;
 /*本软件也耗费了我不少的时间和精力，希望各位同行们尊重个人劳动成果，
  * 如果在此版本的基础上修改发布新的版本，请包含原作者信息（包括代码和UI界面相关信息)，为中国的
  * 开源事业做出一点贡献。*/
+using LeafSoft.Model;
 using NDatabase;
 using NDatabase.Core.Query.Values;
 using NDatabase.Api;
@@ -184,6 +185,7 @@ namespace LeafSoft.Units
         /// <param name="e"></param>
         private void btnAutoSend_Click(object sender, EventArgs e)
         {
+            ResultMaster.InitData();
             if (AutoSend == false)
             {
                 btnAutoSend.Text = "停止循环";

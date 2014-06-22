@@ -106,6 +106,7 @@
     <Compile Include="Lib\SnifferSocket.cs" />
     <Compile Include="Model\IPPacket.cs" />
     <Compile Include="Model\LeafUDPClient.cs" />
+    <Compile Include="Model\ReturnResult.cs" />
     <Compile Include="PartPanel\ComMonitor.cs">
       <SubType>UserControl</SubType>
     </Compile>

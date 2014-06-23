@@ -67,7 +67,7 @@ namespace LeafSoft.Model
                 SubId = 1,
                 Description = "帧ID",
                 ReturnType = DataType.IsSource,
-                MinValue = 3,
+                MinValue = 4,
                 MaxValue=6
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -91,7 +91,7 @@ namespace LeafSoft.Model
                 SubId = 1,
                 Description = "帧ID",
                 ReturnType = DataType.IsSource,
-                MinValue = 3,
+                MinValue = 4,
                 MaxValue = 6
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -115,7 +115,7 @@ namespace LeafSoft.Model
                 SubId = 1,
                 Description = "帧ID",
                 ReturnType = DataType.IsSource,
-                MinValue = 3,
+                MinValue = 4,
                 MaxValue = 6
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -131,7 +131,7 @@ namespace LeafSoft.Model
             aMaster.ReturnResults.Add(aReturnResult);
             lstMasters.Add(aMaster);
 
-            aMaster = new ResultMaster { MasterId = 4, Description = "返回指令取药数量", Header = "EE 55 08" };
+            aMaster = new ResultMaster { MasterId = 4, Description = "指令数量", Header = "EE 55 08" };
             aReturnResult = new ReturnResult
             {
                 ObjectId = 7,
@@ -139,7 +139,7 @@ namespace LeafSoft.Model
                 SubId = 1,
                 Description = "帧ID",
                 ReturnType = DataType.IsSource,
-                MinValue = 3,
+                MinValue = 4,
                 MaxValue = 6
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -155,7 +155,7 @@ namespace LeafSoft.Model
             aMaster.ReturnResults.Add(aReturnResult);
             lstMasters.Add(aMaster);
 
-            aMaster = new ResultMaster { MasterId = 5, Description = "返回随机取药数量", Header = "EE 55 08" };
+            aMaster = new ResultMaster { MasterId = 5, Description = "随机数量", Header = "EE 55 08" };
             aReturnResult = new ReturnResult
             {
                 ObjectId = 9,
@@ -163,7 +163,7 @@ namespace LeafSoft.Model
                 SubId = 1,
                 Description = "帧ID",
                 ReturnType = DataType.IsSource,
-                MinValue = 3,
+                MinValue = 4,
                 MaxValue = 4
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -187,7 +187,7 @@ namespace LeafSoft.Model
                 SubId = 3,
                 Description = "药盒位置",
                 ReturnType = DataType.IsSource,
-                MinValue = 8,
+                MinValue = 9,
                 MaxValue = 1
             };
             aMaster.ReturnResults.Add(aReturnResult);
@@ -204,10 +204,274 @@ namespace LeafSoft.Model
             aMaster.ReturnResults.Add(aReturnResult);
             lstMasters.Add(aMaster);
 
-            //using (var odb2 = OdbFactory.Open(DBName))
-            //{
-            //    odb2.Store(lstMasters);
-            //}
+            aMaster = new ResultMaster { MasterId = 6, Description = "电子标签00", Header = "EE 55 08" };
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 10,
+                MasterId = 6,
+                SubId = 1,
+                Description = "帧ID",
+                ReturnType = DataType.IsSource,
+                MinValue = 4,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 11,
+                MasterId = 6,
+                SubId = 2,
+                Description = "药盒位置",
+                ReturnType = DataType.IsSource,
+                MinValue = 9,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 12,
+                MasterId = 6,
+                SubId = 3,
+                Description = "指令标识",
+                ReturnType = DataType.IsSource,
+                MinValue = 6,
+                MaxValue = 2
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 13,
+                MasterId = 6,
+                SubId = 4,
+                Description = "电子标签字节数",
+                ReturnType = DataType.IsFix,
+                Value = "08"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 14,
+                MasterId = 6,
+                SubId = 5,
+                Description = "药盒位置",
+                ReturnType = DataType.IsSource,
+                MinValue = 9,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 15,
+                MasterId = 5,
+                SubId = 6,
+                Description = "指令标识",
+                ReturnType = DataType.IsFix,
+                Value = "00 00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+            lstMasters.Add(aMaster);
+
+            aMaster = new ResultMaster { MasterId = 7, Description = "电子标签01", Header = "EE 55 08" };
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 16,
+                MasterId = 7,
+                SubId = 1,
+                Description = "帧ID",
+                ReturnType = DataType.IsSource,
+                MinValue = 4,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 17,
+                MasterId = 7,
+                SubId = 2,
+                Description = "药盒位置",
+                ReturnType = DataType.IsSource,
+                MinValue = 9,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 18,
+                MasterId = 7,
+                SubId = 3,
+                Description = "电子标签第一节",
+                ReturnType = DataType.IsFix,
+                Value = "01"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 19,
+                MasterId = 7,
+                SubId = 4,
+                Description = "指令标识",
+                ReturnType = DataType.IsSource,
+                MinValue = 7,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 20,
+                MasterId = 7,
+                SubId = 5,
+                Description = "电子标签1",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 21,
+                MasterId = 7,
+                SubId = 6,
+                Description = "电子标签2",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 22,
+                MasterId = 7,
+                SubId = 7,
+                Description = "电子标签3",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 23,
+                MasterId = 7,
+                SubId = 8,
+                Description = "电子标签4",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+            lstMasters.Add(aMaster);
+
+            aMaster = new ResultMaster { MasterId = 8, Description = "电子标签02", Header = "EE 55 08" };
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 24,
+                MasterId = 8,
+                SubId = 1,
+                Description = "帧ID",
+                ReturnType = DataType.IsSource,
+                MinValue = 4,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 25,
+                MasterId = 8,
+                SubId = 2,
+                Description = "药盒位置",
+                ReturnType = DataType.IsSource,
+                MinValue = 9,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 26,
+                MasterId = 8,
+                SubId = 3,
+                Description = "电子标签第二节",
+                ReturnType = DataType.IsFix,
+                Value = "02"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 27,
+                MasterId = 8,
+                SubId = 4,
+                Description = "指令标识",
+                ReturnType = DataType.IsSource,
+                MinValue = 7,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 28,
+                MasterId = 8,
+                SubId = 5,
+                Description = "电子标签1",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 29,
+                MasterId = 8,
+                SubId = 6,
+                Description = "电子标签2",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 30,
+                MasterId = 8,
+                SubId = 7,
+                Description = "电子标签3",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 31,
+                MasterId = 8,
+                SubId = 8,
+                Description = "电子标签4",
+                ReturnType = DataType.IsRandom,
+                MinValue = 1,
+                MaxValue = 255
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+            lstMasters.Add(aMaster);
+
+            using (var odb2 = OdbFactory.Open(DBName))
+            {
+                odb2.Store(lstMasters);
+            }
             //aMaster.SourceInstruct = "EE 55 08 AA 0D 00 12 01 02 0A 00 D6";
             //var a=aMaster.ToString();
         }
@@ -252,12 +516,6 @@ namespace LeafSoft.Model
         /// 原指令
         /// </summary>
         public string SourceInstruct { get; set; }
-
-        public Int32 GetRandom(Int32 Start, Int32 End)
-        {
-            var randObj = new Random();
-            return randObj.Next(Start, End);
-        }
         public override string ToString()
         {
             string sReturn = "";
@@ -266,7 +524,7 @@ namespace LeafSoft.Model
                 switch (ReturnType)
                 {
                     case DataType.IsRandom:
-                        sReturn = Convert.ToString(GetRandom(MinValue, MaxValue));
+                        sReturn = RNG.Next(MinValue, MaxValue).ToString("X2");
                         break;
                     case DataType.IsSource:
                         var source = SourceInstruct.Split(' ');

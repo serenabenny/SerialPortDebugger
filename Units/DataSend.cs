@@ -185,7 +185,7 @@ namespace LeafSoft.Units
         /// <param name="e"></param>
         private void btnAutoSend_Click(object sender, EventArgs e)
         {
-            ResultMaster.InitData();
+            //ResultMaster.InitData();
             if (AutoSend == false)
             {
                 btnAutoSend.Text = "停止循环";

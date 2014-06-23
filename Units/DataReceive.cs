@@ -26,6 +26,7 @@ namespace LeafSoft.Units
         public DataReceive()
         {
             InitializeComponent();
+            
         }
 
         #region 公有方法
@@ -80,8 +81,8 @@ namespace LeafSoft.Units
                     //txtData.AppendText(Environment.NewLine);
                 }
                 txtData.AppendText(content);
-                
-                
+                txtData.SelectionStart = txtData.Text.Length;
+
             }));
         }
         private void lblCount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -262,6 +263,9 @@ namespace LeafSoft.Units
             e.CutOffPositions.Clear();
             foreach (Match m in regex.Matches(e.Line.Text))
                 e.CutOffPositions.Add(m.Index);
+            txtData.GoEnd();
         }
+
+
     }
 }

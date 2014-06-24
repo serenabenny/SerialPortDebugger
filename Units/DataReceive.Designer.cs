@@ -78,6 +78,7 @@ namespace LeafSoft.Units
             this.txtData.Location = new System.Drawing.Point(0, 26);
             this.txtData.Name = "txtData";
             this.txtData.Paddings = new System.Windows.Forms.Padding(0);
+            this.txtData.PreferredLineWidth = 200;
             this.txtData.ReadOnly = true;
             this.txtData.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtData.Size = new System.Drawing.Size(523, 167);

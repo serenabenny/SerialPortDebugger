@@ -62,6 +62,9 @@ namespace LeafSoft.Units
                 ComDevice.Parity = (Parity)Convert.ToInt32(drpParity.SelectedIndex.ToString());
                 ComDevice.DataBits = Convert.ToInt32(drpDataBits.SelectedItem.ToString());
                 ComDevice.StopBits = (StopBits)Convert.ToInt32(drpStopBits.SelectedItem.ToString());
+                ComDevice.Handshake = Handshake.RequestToSend;
+                ComDevice.ReceivedBytesThreshold = 1;
+                //ComDevice
                 try
                 {
                     ComDevice.Open();

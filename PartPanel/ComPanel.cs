@@ -74,7 +74,8 @@ namespace LeafSoft.PartPanel
                 
                 switch (data[6])
                 {
-                    case 0x23://智能药盒加药
+                    case 0x21://抽屉取药
+                    case 0x23://抽屉加药
                         strBuilder.Add("应答帧");
                         strBuilder.Add("打开药盒");
                         strBuilder.Add("关闭药盒");

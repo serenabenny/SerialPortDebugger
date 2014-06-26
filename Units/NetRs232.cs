@@ -19,6 +19,8 @@ namespace LeafSoft.Units
     public partial class NetRs232 :UserControl, ICommunication
     {
         private SerialPort ComDevice = new SerialPort();
+
+        private const string DBName = "Instruct.ndb";
         
         public NetRs232()
         {
@@ -29,6 +31,7 @@ namespace LeafSoft.Units
                 drpComList.SelectedIndex = 0;
                 btnCom.Enabled = true;
             }
+            //drpComList.se
             drpBaudRate.SelectedIndex = 5;
             drpParity.SelectedIndex = 0;
             drpDataBits.SelectedIndex = 0;

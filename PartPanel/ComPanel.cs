@@ -67,7 +67,7 @@ namespace LeafSoft.PartPanel
                 DataReceiver.AddData(data);
             }
 
-            if (DataSender.AutoResult)
+            if (DataSender.AutoResult && data.Length>6)
             {
                 string aSendResult = data.ByteToHexStr();
                 List<string> strBuilder = new List<string>();
@@ -104,6 +104,7 @@ namespace LeafSoft.PartPanel
                 {
                     byte[] returnresult = GetInstruct(instruct, aSendResult);
                     Configer.SendData(returnresult);
+                    DataReceiver.AddData(returnresult, true);
                     Thread.Sleep(1000);
                 }
                 //aMaster.SourceInstruct = "EE 55 08 AA 0D 00 12 01 02 0A 00 D6";

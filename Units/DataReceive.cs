@@ -34,7 +34,7 @@ namespace LeafSoft.Units
         /// 添加数据
         /// </summary>
         /// <param name="data">字节数组</param>
-        public void AddData(byte[] data)
+        public void AddData(byte[] data,bool IsSend=false)
         {
             switch(EncodeType)
             {
@@ -45,19 +45,19 @@ namespace LeafSoft.Units
                     {
                         sb.AppendFormat("{0:x2}" + " ", data[i]);
                     }
-                    AddContent(sb.ToString().ToUpper());
+                    AddContent(sb.ToString().ToUpper(), IsSend);
                     break;
                 case EnumType.DataEncode.ASCII:
                     //ASCII码显示
-                    AddContent(new ASCIIEncoding().GetString(data));
+                    AddContent(new ASCIIEncoding().GetString(data), IsSend);
                     break;
                 case EnumType.DataEncode.UTF8:
                     //UTF8显示
-                    AddContent(new UTF8Encoding().GetString(data));
+                    AddContent(new UTF8Encoding().GetString(data), IsSend);
                     break;
                 case EnumType.DataEncode.GB2312:
                     //GB2312显示
-                    AddContent(Encoding.GetEncoding("GB2312").GetString(data));
+                    AddContent(Encoding.GetEncoding("GB2312").GetString(data), IsSend);
                     break;
             }
             lblCount.Invoke(new MethodInvoker(delegate
@@ -72,7 +72,7 @@ namespace LeafSoft.Units
         /// 添加文本内容
         /// </summary>
         /// <param name="content"></param>
-        private void AddContent(string content)
+        private void AddContent(string content,bool IsSend=false)
         {
             this.BeginInvoke(new MethodInvoker(delegate
             {
@@ -80,8 +80,16 @@ namespace LeafSoft.Units
                 {
                     //txtData.AppendText(Environment.NewLine);
                 }
-                txtData.AppendText(content);
-                txtData.SelectionStart = txtData.Text.Length;
+                if (IsSend)
+                {
+                    txtData.AppendText("Sended:  "+content); 
+                }
+                else
+                {
+                    txtData.AppendText("Recived: "+content); 
+                }
+                txtData.AppendText(Environment.NewLine);
+                //txtData.SelectionStart = txtData.Text.Length;
 
             }));
         }
@@ -259,10 +267,10 @@ namespace LeafSoft.Units
         
         private void txtData_WordWrapNeeded(object sender, WordWrapNeededEventArgs e)
         {
-            Regex regex = new Regex(@"(" + txtMark.Text + @")");
-            e.CutOffPositions.Clear();
-            foreach (Match m in regex.Matches(e.Line.Text))
-                e.CutOffPositions.Add(m.Index);
+            //Regex regex = new Regex(@"(" + txtMark.Text + @")");
+            //e.CutOffPositions.Clear();
+            //foreach (Match m in regex.Matches(e.Line.Text))
+            //    e.CutOffPositions.Add(m.Index);
             txtData.GoEnd();
         }
 

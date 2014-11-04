@@ -48,9 +48,12 @@
             this.lblCount = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.ckbAutoSend = new System.Windows.Forms.CheckBox();
+            this.numTimes = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgCMD)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimes)).BeginInit();
             this.SuspendLayout();
             // 
             // dgCMD
@@ -89,7 +92,7 @@
             this.dgCMD.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgCMD.RowTemplate.Height = 23;
             this.dgCMD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCMD.Size = new System.Drawing.Size(471, 151);
+            this.dgCMD.Size = new System.Drawing.Size(564, 151);
             this.dgCMD.TabIndex = 0;
             this.dgCMD.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCMD_CellContentClick);
             this.dgCMD.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgCMD_RowsAdded);
@@ -234,17 +237,48 @@
             // 
             this.ckbAutoSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ckbAutoSend.AutoSize = true;
-            this.ckbAutoSend.Location = new System.Drawing.Point(379, 162);
+            this.ckbAutoSend.Location = new System.Drawing.Point(488, 162);
             this.ckbAutoSend.Name = "ckbAutoSend";
             this.ckbAutoSend.Size = new System.Drawing.Size(72, 16);
             this.ckbAutoSend.TabIndex = 9;
             this.ckbAutoSend.Text = "自动回发";
             this.ckbAutoSend.UseVisualStyleBackColor = true;
             // 
+            // numTimes
+            // 
+            this.numTimes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numTimes.Location = new System.Drawing.Point(436, 159);
+            this.numTimes.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numTimes.Name = "numTimes";
+            this.numTimes.Size = new System.Drawing.Size(46, 21);
+            this.numTimes.TabIndex = 11;
+            this.numTimes.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(365, 162);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "发送次数：";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // DataSend
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.numTimes);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.ckbAutoSend);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.label4);
@@ -254,10 +288,11 @@
             this.Controls.Add(this.btnAutoSend);
             this.Controls.Add(this.dgCMD);
             this.Name = "DataSend";
-            this.Size = new System.Drawing.Size(471, 188);
+            this.Size = new System.Drawing.Size(564, 188);
             ((System.ComponentModel.ISupportInitialize)(this.dgCMD)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nmDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,5 +316,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CMDText;
         private System.Windows.Forms.DataGridViewButtonColumn btnSend;
         private System.Windows.Forms.CheckBox ckbAutoSend;
+        private System.Windows.Forms.NumericUpDown numTimes;
+        private System.Windows.Forms.Label label3;
     }
 }

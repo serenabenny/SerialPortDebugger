@@ -23,6 +23,16 @@ namespace LeafSoft.PartPanel
         public ComPanel()
         {
             InitializeComponent();
+            int oObj;
+            using (var odb2 = OdbFactory.Open(DBName))
+            {
+                oObj = odb2.QueryAndExecute<ResultMaster>().Count;
+            }
+            if (oObj == 0)
+            {
+                ResultMaster.InitData();
+            }
+
         }
 
         private bool DataSender_EventDataSend(byte[] data)
@@ -30,7 +40,7 @@ namespace LeafSoft.PartPanel
             return Configer.SendData(data);
         }
 
-        private byte[] GetInstruct(string InstrName,string sourceinstruct)
+        private byte[] GetInstruct(string InstrName, string sourceinstruct)
         {
             using (var odb2 = OdbFactory.Open(DBName))
             {
@@ -38,7 +48,7 @@ namespace LeafSoft.PartPanel
                         odb2.QueryAndExecute<ResultMaster>().First(p => p.Description.Contains(InstrName));
                 oObj.SourceInstruct = sourceinstruct;
                 byte[] sendinstruct = oObj.ToString().StrToToHexByte();
-                
+
                 //var delete = lstCMD[dgCMD.SelectedRows[0].Index];
                 //odb2.GetObjectFromId(delete);
                 //odb2.Delete(oObj);
@@ -49,12 +59,12 @@ namespace LeafSoft.PartPanel
         {
             if (txtCmd.Visible == true)
             {
-                if(data.Length>1)
+                if (data.Length > 1)
                 {
                     txtCmd.BeginInvoke(new MethodInvoker(delegate
                     {
                         txtCmd.AppendText(new UTF8Encoding().GetString(data).Replace("\r", "\r\n"));
-                        txtCmd.SelectionStart = txtCmd.Text.Length;  
+                        txtCmd.SelectionStart = txtCmd.Text.Length;
                     }));
                 }
             }
@@ -63,11 +73,11 @@ namespace LeafSoft.PartPanel
                 DataReceiver.AddData(data);
             }
 
-            if (DataSender.AutoResult && data.Length>6)
+            if (DataSender.AutoResult && data.Length > 6)
             {
                 string aSendResult = data.ByteToHexStr();
                 List<string> strBuilder = new List<string>();
-                
+
                 switch (data[6])
                 {
                     case 0x21://抽屉取药
@@ -106,7 +116,7 @@ namespace LeafSoft.PartPanel
                 //aMaster.SourceInstruct = "EE 55 08 AA 0D 00 12 01 02 0A 00 D6";
                 //var a=aMaster.ToString();
 
-                
+
                 ////应答帧
                 //aSendResult[aSendResult.Length - 3] = 0xA1;
                 //Configer.SendData(aSendResult);
@@ -144,7 +154,7 @@ namespace LeafSoft.PartPanel
 
         private bool txtCmd_DataSend(byte[] cmd)
         {
-           return Configer.SendData(cmd);
+            return Configer.SendData(cmd);
         }
 
         private void MS_ClearCMD_Click(object sender, EventArgs e)

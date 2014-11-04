@@ -74,10 +74,10 @@ namespace LeafSoft.Units
             }
             catch (Exception)
             {
-                
+
                 //throw;
             }
-            
+
         }
 
         private void dgCMD_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -119,10 +119,10 @@ namespace LeafSoft.Units
             {
                 using (var odb2 = OdbFactory.Open(DBName))
                 {
-                    var nMaxId=odb2.ValuesQuery<Model.CMD>().Max("ObjectId").Execute().GetFirst().GetValues().First();
+                    var nMaxId = odb2.ValuesQuery<Model.CMD>().Max("ObjectId").Execute().GetFirst().GetValues().First();
                     fCmd.NewCMD.ObjectId = Convert.ToInt32(nMaxId) + 1;
                     odb2.Store(fCmd.NewCMD);
-                    
+
                 }
                 lstCMD.Add(fCmd.NewCMD);
             }
@@ -138,23 +138,49 @@ namespace LeafSoft.Units
             if (dgCMD.SelectedRows.Count > 0)
             {
                 frmCMD fCmd = new frmCMD(lstCMD[dgCMD.SelectedRows[0].Index]);
+                var selectindex = dgCMD.SelectedRows[0].Index;
+                var objid = lstCMD[dgCMD.SelectedRows[0].Index].ObjectId;
                 if (fCmd.ShowDialog() == DialogResult.OK)
                 {
                     using (var odb2 = OdbFactory.OpenLast())
                     {
                         var oObj =
-                            odb2.QueryAndExecute<Model.CMD>().First(p => p.ObjectId == lstCMD[dgCMD.SelectedRows[0].Index].ObjectId);
+                            odb2.QueryAndExecute<Model.CMD>().First(p => p.ObjectId == objid);
                         oObj.Bytes = fCmd.NewCMD.Bytes;
                         oObj.ContentType = fCmd.NewCMD.ContentType;
                         oObj.Text = fCmd.NewCMD.Text;
                         odb2.Store(oObj);
 
                     }
-                    lstCMD[dgCMD.SelectedRows[0].Index] = fCmd.NewCMD;
+                    loaddata();
+                    dgCMD.CurrentCell = dgCMD.Rows[selectindex].Cells[0];
+                    //lstCMD[dgCMD.SelectedRows[0].Index] = fCmd.NewCMD;
                 }
             }
         }
 
+        private void loaddata()
+        {
+            using (var odb2 = OdbFactory.Open(DBName))
+            {
+                lstCMD.Clear();
+                var list = odb2.Query<Model.CMD>().Execute<Model.CMD>();
+
+                foreach (var cmd in list)
+                {
+                    lstCMD.Add(cmd);
+                }
+                if (lstCMD.Count == 0)
+                {
+                    var tmpInstruct = new Model.CMD(EnumType.DataEncode.Hex, "EE 55 08 AA 0D 00 12 01 02 00 00 CC".StrToToHexByte());
+                    tmpInstruct.ObjectId = 1;
+                    odb2.Store(tmpInstruct);
+                    lstCMD.Add(tmpInstruct);
+                }
+
+                dgCMD.DataSource = lstCMD;
+            }
+        }
         /// <summary>
         /// 删除调试命令
         /// </summary>
@@ -173,7 +199,7 @@ namespace LeafSoft.Units
                     odb2.Delete(oObj);
 
                 }
-                
+
                 lstCMD.RemoveAt(dgCMD.SelectedRows[0].Index);
             }
         }
@@ -210,6 +236,7 @@ namespace LeafSoft.Units
             try
             {
                 object sendlock = new object();
+                int nCount = 0;
                 int SendInterval = Convert.ToInt32(Interval);
                 while (AutoSend)
                 {
@@ -245,7 +272,14 @@ namespace LeafSoft.Units
                             break;
                         }
                     }
+                    nCount++;
+                    if (nCount == numTimes.Value)
+                    {
+                        StopAutoSend();
+                        //break;
+                    }
                 }
+                
             }
             catch { };
         }
@@ -255,10 +289,20 @@ namespace LeafSoft.Units
         /// </summary>
         private void StopAutoSend()
         {
-            AutoSend = false;
-            btnAutoSend.Text = "循环发送";
-            dgCMD.Enabled = true;
-            nmDelay.Enabled = true;
+            
+            if (btnAutoSend.InvokeRequired)
+            {
+                BeginInvoke(new Action(StopAutoSend));
+            }
+            else
+            {
+                AutoSend = false;
+                btnAutoSend.Text = "循环发送";
+                dgCMD.Enabled = true;
+                nmDelay.Enabled = true;
+            }
+            //btnAutoSend.Text = "循环发送";
+            
         }
 
         private void lblCount_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

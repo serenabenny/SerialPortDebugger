@@ -82,11 +82,11 @@ namespace LeafSoft.Units
                 }
                 if (IsSend)
                 {
-                    txtData.AppendText("Sended:  "+content); 
+                    txtData.AppendText("<< "+content); 
                 }
                 else
                 {
-                    txtData.AppendText("Recived: "+content); 
+                    txtData.AppendText(">> "+content); 
                 }
                 txtData.AppendText(Environment.NewLine);
                 //txtData.SelectionStart = txtData.Text.Length;

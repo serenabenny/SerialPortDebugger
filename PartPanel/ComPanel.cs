@@ -70,7 +70,10 @@ namespace LeafSoft.PartPanel
             }
             else
             {
-                DataReceiver.AddData(data);
+                if (data.Length > 1)
+                {
+                    DataReceiver.AddData(data);
+                }
             }
 
             if (DataSender.AutoResult && data.Length > 6)
@@ -78,33 +81,62 @@ namespace LeafSoft.PartPanel
                 string aSendResult = data.ByteToHexStr();
                 List<string> strBuilder = new List<string>();
 
-                switch (data[6])
+                if (data[0]==0xfa && data[1]==0xf5)
                 {
-                    case 0x21://抽屉取药
-                    case 0x23://抽屉加药
-                        strBuilder.Add("应答帧");
-                        strBuilder.Add("打开药盒");
-                        strBuilder.Add("关闭药盒");
-                        strBuilder.Add("随机数量");
-                        break;
-                    case 0x22://抽屉盘点
-                    case 0x12://智能药盒盘点
-                        strBuilder.Add("应答帧");
-                        strBuilder.Add("随机数量");
-                        break;
-                    case 0x14://电子标签
-                        strBuilder.Add("应答帧");
-                        strBuilder.Add("电子标签00");
-                        strBuilder.Add("电子标签01");
-                        strBuilder.Add("电子标签02");
-                        break;
-                    default:
-                        strBuilder.Add("应答帧");
-                        strBuilder.Add("打开药盒");
-                        strBuilder.Add("关闭药盒");
-                        strBuilder.Add("指令数量");
-                        break;
+                    switch (data[3])
+                    {
+                        case 0x27://启动
+                            strBuilder.Add("盒剂-启动");
+                            break;
+                        case 0x20://进篮子
+                            strBuilder.Add("盒剂-应答帧");
+                            strBuilder.Add("盒剂-进篮子");
+                            break;
+                        case 0x12://发药
+                            strBuilder.Add("盒剂-应答帧");
+                            strBuilder.Add("盒剂-发药结果");
+                            break;
+                        case 0x22://送篮子
+                            strBuilder.Add("盒剂-应答帧");
+                            strBuilder.Add("盒剂-送篮子");
+                            break;
+                        default:
+                            strBuilder.Add("盒剂-应答帧");
+                            strBuilder.Add("盒剂-发药结果");
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (data[6])
+                    {
+                        case 0x21://抽屉取药
+                        case 0x23://抽屉加药
+                            strBuilder.Add("应答帧");
+                            strBuilder.Add("打开药盒");
+                            strBuilder.Add("关闭药盒");
+                            strBuilder.Add("随机数量");
+                            break;
+                        case 0x22://抽屉盘点
+                        case 0x12://智能药盒盘点
+                            strBuilder.Add("应答帧");
+                            strBuilder.Add("随机数量");
+                            break;
+                        case 0x14://电子标签
+                            strBuilder.Add("应答帧");
+                            strBuilder.Add("电子标签00");
+                            strBuilder.Add("电子标签01");
+                            strBuilder.Add("电子标签02");
+                            break;
+                        default:
+                            strBuilder.Add("应答帧");
+                            strBuilder.Add("打开药盒");
+                            strBuilder.Add("关闭药盒");
+                            strBuilder.Add("指令数量");
+                            break;
+                    }
+                }
+                
 
                 foreach (var instruct in strBuilder)
                 {

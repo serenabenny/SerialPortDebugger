@@ -86,7 +86,7 @@ namespace LeafSoft.Model
                         break;
                     case DataType.IsAddOne:
                         var source1 = SourceInstruct.Split(' ');
-                        int sValue = Convert.ToByte(source1[MinValue]) + 1;
+                        int sValue = Convert.ToByte(source1[MinValue],16) + 1;
                         sReturn = sValue.ToString("X2");
                         break;
                     case DataType.IsLength:
@@ -423,6 +423,8 @@ namespace LeafSoft.Model
                 ReturnType = DataType.IsAddOne,
                 MinValue = 4
             };
+            aMaster.ReturnResults.Add(aReturnResult);
+
             aReturnResult = new ReturnResult
             {
                 ObjectId = 1000403,

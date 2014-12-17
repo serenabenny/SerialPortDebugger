@@ -102,7 +102,6 @@ namespace LeafSoft.PartPanel
                             break;
                         default:
                             strBuilder.Add("盒剂-应答帧");
-                            strBuilder.Add("盒剂-发药结果");
                             break;
                     }
                 }

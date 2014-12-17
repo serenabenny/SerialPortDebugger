@@ -13,7 +13,8 @@ namespace LeafSoft.Model
         IsFix = 2,
         IsCheckSum = 3,
         IsAddOne = 4,
-        IsLength = 5
+        IsLength = 5,
+        IsRecordData = 6
     }
     public class ReturnResult
     {
@@ -54,6 +55,8 @@ namespace LeafSoft.Model
         /// 原指令
         /// </summary>
         public string SourceInstruct { get; set; }
+
+        public string RecordData { get; set; }
         public override string ToString()
         {
             string sReturn = "";
@@ -81,12 +84,28 @@ namespace LeafSoft.Model
                         }
                         //sReturn = [SourcePosition];
                         break;
+                    case DataType.IsRecordData:
+                        var source2 = RecordData.Split(' ');
+                        int nLength2 = 0;
+                        if (MaxValue > 0)
+                        {
+                            nLength2 = MinValue + MaxValue;
+                        }
+                        else
+                        {
+                            nLength2 = source2.Count();
+                        }
+                        for (int i = MinValue; i < nLength2; i++)
+                        {
+                            sReturn += " " + source2[i];
+                        }
+                        break;
                     case DataType.IsCheckSum:
                         sReturn = "CR";
                         break;
                     case DataType.IsAddOne:
                         var source1 = SourceInstruct.Split(' ');
-                        int sValue = Convert.ToByte(source1[MinValue],16) + 1;
+                        int sValue = Convert.ToByte(source1[MinValue], 16) + 1;
                         sReturn = sValue.ToString("X2");
                         break;
                     case DataType.IsLength:
@@ -114,20 +133,53 @@ namespace LeafSoft.Model
         {
             ReturnResults = new List<ReturnResult>();
         }
+        /// <summary>
+        /// 主键ID
+        /// </summary>
         public int MasterId { get; set; }
         /// <summary>
         /// 说明
         /// </summary>
         public string Description { get; set; }
-
+        /// <summary>
+        /// 指令头
+        /// </summary>
         public string Header { get; set; }
-
+        /// <summary>
+        /// 计算校验码首字节地址
+        /// </summary>
         public int CheckSumFristByte { get; set; }
-
+        /// <summary>
+        /// 计算校验码字节数，当值设为0时，意思为首字节地址至指令尾进行计算
+        /// </summary>
         public int CheckSumTotalByte { get; set; }
-
+        /// <summary>
+        /// 是否取消已经记录的数据
+        /// </summary>
+        public bool IsCancelRecordData { get; set; }
+        /// <summary>
+        /// 是否记录生成的数据
+        /// </summary>
+        public bool IsRecordData { get; set; }
+        /// <summary>
+        /// 记录的数据
+        /// </summary>
+        public string RecordData { get; set; }
+        /// <summary>
+        /// 记录数据首地址
+        /// </summary>
+        public int RecordDataFristData { get; set; }
+        /// <summary>
+        /// 记录数据的长度
+        /// </summary>
+        public int RecordDataTotoalByte { get; set; }
+        /// <summary>
+        /// 指令集
+        /// </summary>
         public List<ReturnResult> ReturnResults { get; set; }
-
+        /// <summary>
+        /// 源指令
+        /// </summary>
         public string SourceInstruct { get; set; }
 
         public override string ToString()
@@ -136,6 +188,7 @@ namespace LeafSoft.Model
             foreach (var returnResult in ReturnResults)
             {
                 returnResult.SourceInstruct = SourceInstruct;
+                returnResult.RecordData = RecordData;
                 sReturn += " " + returnResult.ToString();
             }
             sReturn = Header + " " + sReturn.Trim();
@@ -265,6 +318,9 @@ namespace LeafSoft.Model
                 CheckSumFristByte = 8,
                 CheckSumTotalByte = 0,
                 Description = "盒剂-进篮子",
+                IsRecordData = true,
+                RecordDataFristData = 9,
+                RecordDataTotoalByte = 4,
                 Header = "FA F5"
             };
             aReturnResult = new ReturnResult
@@ -586,9 +642,9 @@ namespace LeafSoft.Model
                 MasterId = 10005,
                 SubId = 10,
                 Description = "卡号4",
-                ReturnType = DataType.IsRandom,
-                MinValue = 0,
-                MaxValue = 30
+                ReturnType = DataType.IsRecordData,
+                MinValue = 4,
+                MaxValue = 1
             };
             aMaster.ReturnResults.Add(aReturnResult);
 
@@ -606,6 +662,141 @@ namespace LeafSoft.Model
             lstMasters.Add(aMaster);
             #endregion
 
+            #region 盒剂-上缓存架
+            aMaster = new ResultMaster
+            {
+                MasterId = 10006,
+                CheckSumFristByte = 8,
+                CheckSumTotalByte = 0,
+                Description = "盒剂-上缓存架",
+                IsCancelRecordData = true,
+                Header = "FA F5"
+            };
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000601,
+                MasterId = 10006,
+                SubId = 1,
+                Description = "流水号",
+                ReturnType = DataType.IsSource,
+                MinValue = 3,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000602,
+                MasterId = 10006,
+                SubId = 2,
+                Description = "命令类型",
+                ReturnType = DataType.IsFix,
+                Value = "24"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000603,
+                MasterId = 10006,
+                SubId = 3,
+                Description = "校验码",
+                ReturnType = DataType.IsCheckSum
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000604,
+                MasterId = 10006,
+                SubId = 4,
+                Description = "状态位",
+                ReturnType = DataType.IsFix,
+                Value = "00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000605,
+                MasterId = 10006,
+                SubId = 5,
+                Description = "长度位",
+                ReturnType = DataType.IsLength
+            };
+
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000606,
+                MasterId = 10006,
+                SubId = 6,
+                Description = "窗口号",
+                ReturnType = DataType.IsSource,
+                MinValue = 8,
+                MaxValue = 2
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000607,
+                MasterId = 10006,
+                SubId = 7,
+                Description = "卡号1",
+                ReturnType = DataType.IsFix,
+                Value = "00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000608,
+                MasterId = 10006,
+                SubId = 8,
+                Description = "卡号2",
+                ReturnType = DataType.IsFix,
+                Value = "00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000609,
+                MasterId = 10006,
+                SubId = 9,
+                Description = "卡号3",
+                ReturnType = DataType.IsFix,
+                Value = "00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000610,
+                MasterId = 10006,
+                SubId = 10,
+                Description = "卡号4",
+                ReturnType = DataType.IsRecordData,
+                MinValue = 4,
+                MaxValue = 1
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            aReturnResult = new ReturnResult
+            {
+                ObjectId = 1000611,
+                MasterId = 10006,
+                SubId = 11,
+                Description = "错误码",
+                ReturnType = DataType.IsFix,
+                Value = "00 00"
+            };
+            aMaster.ReturnResults.Add(aReturnResult);
+
+            lstMasters.Add(aMaster);
+            #endregion
             #endregion
 
             //EE 55 08 AA 0D 00 12 01 02 0A 00 D6

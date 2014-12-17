@@ -20,6 +20,9 @@ namespace LeafSoft.PartPanel
     public partial class ComPanel : BasePanel
     {
         private const string DBName = "Instruct.ndb";
+
+        private string RecordData = "";
+
         public ComPanel()
         {
             InitializeComponent();
@@ -40,14 +43,43 @@ namespace LeafSoft.PartPanel
             return Configer.SendData(data);
         }
 
-        private byte[] GetInstruct(string InstrName, string sourceinstruct)
+        private byte[] GetInstruct(string InstrName, string sourceinstruct, out string recorddata, string saveddata = "")
         {
             using (var odb2 = OdbFactory.Open(DBName))
             {
                 var oObj =
                         odb2.QueryAndExecute<ResultMaster>().First(p => p.Description.Contains(InstrName));
                 oObj.SourceInstruct = sourceinstruct;
-                byte[] sendinstruct = oObj.ToString().StrToToHexByte();
+                oObj.RecordData = saveddata;
+                var sendinstruct1 = oObj.ToString();
+                if (oObj.IsCancelRecordData)
+                {
+                    saveddata = "";
+                }
+                if (oObj.IsRecordData)
+                {
+                    var str = sendinstruct1.Split(' ');
+                    string sReturn = "";
+                    int nLength = 0;
+                    if (oObj.RecordDataTotoalByte > 0)
+                    {
+                        nLength = oObj.RecordDataFristData + oObj.RecordDataTotoalByte;
+                    }
+                    else
+                    {
+                        nLength = str.Count();
+                    }
+                    for (int i = oObj.RecordDataFristData; i < nLength; i++)
+                    {
+                        sReturn += " " + str[i];
+                    }
+                    recorddata = sReturn;
+                }
+                else
+                {
+                    recorddata = saveddata;
+                }
+                byte[] sendinstruct = sendinstruct1.StrToToHexByte();
 
                 //var delete = lstCMD[dgCMD.SelectedRows[0].Index];
                 //odb2.GetObjectFromId(delete);
@@ -81,7 +113,7 @@ namespace LeafSoft.PartPanel
                 string aSendResult = data.ByteToHexStr();
                 List<string> strBuilder = new List<string>();
 
-                if (data[0]==0xfa && data[1]==0xf5)
+                if (data[0] == 0xfa && data[1] == 0xf5)
                 {
                     switch (data[3])
                     {
@@ -99,6 +131,7 @@ namespace LeafSoft.PartPanel
                         case 0x22://送篮子
                             strBuilder.Add("盒剂-应答帧");
                             strBuilder.Add("盒剂-送篮子");
+                            strBuilder.Add("盒剂-上缓存架");
                             break;
                         default:
                             strBuilder.Add("盒剂-应答帧");
@@ -135,11 +168,11 @@ namespace LeafSoft.PartPanel
                             break;
                     }
                 }
-                
+
 
                 foreach (var instruct in strBuilder)
                 {
-                    byte[] returnresult = GetInstruct(instruct, aSendResult);
+                    byte[] returnresult = GetInstruct(instruct, aSendResult, out RecordData, RecordData);
                     Configer.SendData(returnresult);
                     DataReceiver.AddData(returnresult, true);
                     Thread.Sleep(1000);
